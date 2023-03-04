@@ -8,23 +8,23 @@ def compute_height(n, parents):
     values = 0
     
     
-    vievedvalues = np.zeros(n)
-    for i in range(n):
+    vievedvalues = np.zeros( n )
+    for i in range( n ):
         
-        if(vievedvalues[i] == 0):
+        if(vievedvalues[ i ] == 0 ):
             values = i
-            height = np.zeros(n)
+            height = np.zeros( n )
             count = 0
-            while(values >= 0 and height[values] == 0):
-                vievedvalues[values] = 1
-                height[values] = 1
+            while( values >= 0 and height[ values ] == 0 ):
+                vievedvalues[ values ] = 1
+                height[ values ] = 1
                 count = count + 1
-                values = parents[values]
+                values = parents[ values ]
                 
-            if (count > max_height):
+            if ( count > max_height ):
                 max_height = count
         
-    return int(max_height)
+    return int( max_height )
 
 
 def main():
@@ -34,14 +34,14 @@ def main():
         path = input()
         path = "test/" + path
         if 'a' not in path:
-            with open(path, "r") as f:
-                    n = int(f.readline())
-                    parents = np.array(list(map(int, f.readline().split())))
-                    print(compute_height(n, parents))
+            with open( path, "r" ) as f:
+                    n = int( f.readline() )
+                    parents = np.array( list(map(int, f.readline().split())) )
+                    print( compute_height(n, parents) )
     elif 'I' in userinput:
-        n = int(input())
-        parents = np.array(list(map(int, input().split())))
-        print(compute_height(n, parents))
+        n = int( input() )
+        parents = np.array( list(map(int, input().split())) )
+        print( compute_height(n, parents) )
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
     # input number of elements
