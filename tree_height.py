@@ -10,7 +10,7 @@ def compute_height(n, parents):
     apskatitie = np.zeros(n)
     for i in range(n):
         
-        if(vieved_values[i] ==0):
+        if(apskatitie[i] ==0):
             values=i
             height = np.zeros(n)
             count =0
