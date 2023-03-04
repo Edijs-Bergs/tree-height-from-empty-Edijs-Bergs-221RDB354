@@ -27,10 +27,10 @@ def compute_height(n, parents):
 
 def main():
     # Read input from file in the "tests" folder
-    file_name = input("Enter file name: ")
+    file_name = input()
     while 'a' in file_name:
         print("File name cannot contain letter 'a'.")
-        file_name = input("Enter file name: ")
+        file_name = input()
 
     try:
         with open(f"test/{file_name}", "r") as f:
