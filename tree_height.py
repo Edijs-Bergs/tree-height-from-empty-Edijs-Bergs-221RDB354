@@ -29,7 +29,7 @@ def main():
     file_name = input("Enter the file name: ")
 
     # Read the input file from the Github repository
-    url = "https://raw.githubusercontent.com//DA-testa/tree-height-from-empty-Edijs-Bergs-221RDB354/main/tests/" + file_name
+    url = "https://raw.githubusercontent.com/DA-testa/tree-height-from-empty-Edijs-Bergs-221RDB354/tree/main/test" + file_name
     response = requests.get(url)
 
     # Check if the request was successful
