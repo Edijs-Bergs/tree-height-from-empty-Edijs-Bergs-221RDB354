@@ -4,20 +4,21 @@ import numpy as np
 
 def compute_height(n, parents):
     # Write this function
-    values=0
     max_height = 0
+    values = 0
+    
     
     apskatitie = np.zeros(n)
     for i in range(n):
         
-        if(apskatitie[i] ==0):
-            values=i
+        if(apskatitie[i] == 0):
+            values = i
             height = np.zeros(n)
-            count =0
+            count = 0
             while(values >= 0 and height[values] == 0):
                 apskatitie[values] = 1
                 height[values] = 1
-                count+=1
+                count = count + 1
                 values = parents[values]
                 
             if (count > max_height):
