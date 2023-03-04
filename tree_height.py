@@ -33,7 +33,7 @@ def main():
         file_name = input("Enter file name: ")
 
     try:
-        with open(f"tests/{file_name}", "r") as f:
+        with open(f"test/{file_name}", "r") as f:
             n = int(f.readline().strip())
             parents = list(map(int, f.readline().strip().split()))
     except:
