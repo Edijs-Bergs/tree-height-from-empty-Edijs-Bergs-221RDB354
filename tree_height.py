@@ -30,18 +30,20 @@ def compute_height(n, parents):
 def main():
     # implement input form keyboard and from files
     userinput = input()
-    if 'F' in userinput:
+    if 'I' in userinput:
+        n = int( input() )
+        parents = np.array( list(map(int, input().split())) )
+        print( compute_height(n, parents) )
+    elif 'F' in userinput:
         path = input()
         path = "test/" + path
         if 'a' not in path:
             with open( path, "r" ) as f:
-                    n = int( f.readline() )
-                    parents = np.array( list(map(int, f.readline().split())) )
-                    print( compute_height(n, parents) )
-    elif 'I' in userinput:
-        n = int( input() )
-        parents = np.array( list(map(int, input().split())) )
-        print( compute_height(n, parents) )
+                n = int( f.readline() )
+                parents = np.array( list(map(int, f.readline().split())) )
+                print( compute_height(n, parents) )
+
+        
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
     # input number of elements
