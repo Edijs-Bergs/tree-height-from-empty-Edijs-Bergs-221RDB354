@@ -6,22 +6,49 @@ import numpy
 
 
 def compute_height(n, parents):
-    # Write this function
-    max_height = 0
-    # Your code here
-    return max_height
+    # Initialize an array to keep track of the heights of the nodes
+    heights = [0] * n
+
+    # Calculate the height of each node in a bottom-up fashion
+    for i in range(n):
+        if heights[i] == 0:  # Node i hasn't been visited yet
+            height = 1  # Height of the current node
+            j = i  # Index of the parent of the current node
+
+            while parents[j] != -1:
+                if heights[j] != 0:  # Height of parent j has already been calculated
+                    height += heights[j]
+                    break
+                height += 1
+                j = parents[j]
+
+            heights[i] = height
+
+    # Return the maximum height
+    return max(heights)
 
 
 def main():
-    # implement input form keyboard and from files
-    
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
-    
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
-    pass
+    # Read the input file
+    filename = input("Enter the filename: ")
+    if 'a' in filename:
+        print("Invalid filename")
+        return
+
+    try:
+        with open(filename) as f:
+            n = int(f.readline())
+            parents = list(map(int, f.readline().split()))
+    except FileNotFoundError:
+        print("File not found")
+        return
+
+    # Calculate the height of the tree
+    height = compute_height(n, parents)
+
+    # Print the result
+    print(height)
+
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
