@@ -27,7 +27,7 @@ def compute_height(n, parents):
 
 
 def main():
-    # implement input form keyboard and from files
+    
     userinput = input()
     if 'F' in userinput:
         path = input()
