@@ -2,9 +2,6 @@ import sys
 import threading
 import numpy as np
 
-# 4 -1 4 1 1
-# 0 1 2 3 4
-
 def compute_height(n, parents):
     # Write this function
     vertiba=0
@@ -22,34 +19,17 @@ def compute_height(n, parents):
                 height[vertiba] = 1
                 count+=1
                 vertiba = parents[vertiba]
-            # for m in range (n):
-            #     if (m != vertiba and height[m] !=0):
-            #         height[m] +=count
                 
             if (count > max_height):
                 max_height = count
-        # print(max_height)
-        # print(i)
-        # apskatitie[vertiba] = 1
-        # if height[vertiba] != 0:
-        #     return np.count_nonzero(apskatitie)
-        # height[vertiba] = 1
-        # vertiba = parents[vertiba]
-        # if i!=0:
-        #     for m in range (n):
-        #         if (m != vertiba and height[m] !=0):
-        #             height[m] +=1
         
-
-    # Your code here
-    # return np.count_nonzero(apskatitie)
     return int(max_height)
 
 
 def main():
     # implement input form keyboard and from files
-    ievade = input()
-    if 'F' in ievade:
+    userinput = input()
+    if 'F' in userinput:
         path = input()
         path = "test/" + path
         if 'a' not in path:
@@ -57,7 +37,7 @@ def main():
                     n = int(f.readline())
                     parents = np.array(list(map(int, f.readline().split())))
                     print(compute_height(n, parents))
-    if 'I' in ievade:
+    if 'I' in userinput:
         n = int(input())
         parents = np.array(list(map(int, input().split())))
         print(compute_height(n, parents))
