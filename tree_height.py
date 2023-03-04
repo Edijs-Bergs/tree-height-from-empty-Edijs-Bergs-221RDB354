@@ -37,7 +37,7 @@ def main():
                     n = int(f.readline())
                     parents = np.array(list(map(int, f.readline().split())))
                     print(compute_height(n, parents))
-    if 'I' in userinput:
+    elif 'I' in userinput:
         n = int(input())
         parents = np.array(list(map(int, input().split())))
         print(compute_height(n, parents))
