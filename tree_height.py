@@ -3,64 +3,44 @@ import threading
 import numpy as np
 
 def compute_height(n, parents):
+    # Write this function
+    values=0
     max_height = 0
-
-    # Mark each node as visited or unvisited
-    visited = np.zeros(n)
-
+    
+    apskatitie = np.zeros(n)
     for i in range(n):
-        if visited[i] == 0:
-            height = 1
-            node = i
-            # Traverse the tree upwards from the current node to the root
-            while node != -1:
-                if visited[node] == 1:
-                    height += visited[node]
-                    break
-                node = parents[node]
-                height += 1
+        
+        if(vieved_values[i] ==0):
+            values=i
+            height = np.zeros(n)
+            count =0
+            while(values >= 0 and height[values] == 0):
+                apskatitie[values] = 1
+                height[values] = 1
+                count+=1
+                values = parents[values]
                 
-            # Update the maximum height
-            max_height = max(max_height, height)
-            
-            # Update the visited array
-            node = i
-            while node != -1 and visited[node] == 0:
-                visited[node] = height
-                node = parents[node]
-                
-    return max_height
+            if (count > max_height):
+                max_height = count
+        
+    return int(max_height)
 
 
 def main():
-    user_input = input().strip()
-
-    if user_input == 'I':
-        n = int(input().strip())
-        parents = np.array(list(map(int, input().strip().split())))
+    # implement input form keyboard and from files
+    userinput = input()
+    if 'F' in userinput:
+        path = input()
+        path = "test/" + path
+        if 'a' not in path:
+            with open(path, "r") as f:
+                    n = int(f.readline())
+                    parents = np.array(list(map(int, f.readline().split())))
+                    print(compute_height(n, parents))
+    elif 'I' in userinput:
+        n = int(input())
+        parents = np.array(list(map(int, input().split())))
         print(compute_height(n, parents))
-        
-    elif user_input == 'F':
-        file_name = input().strip()
-        file_path = "test/" + file_name
-        
-        # Make sure the file name does not contain the letter 'a'
-        if 'a' in file_name:
-            print("Invalid file name")
-            return
-        
-        try:
-            with open(file_path, "r") as f:
-                n = int(f.readline().strip())
-                parents = np.array(list(map(int, f.readline().strip().split())))
-                print(compute_height(n, parents))
-                
-        except:
-            print("Error reading file")
-            return
-        
-    else:
-        print("Invalid input")
     # let user input file name to use, don't allow file names with letter a
     # account for github input inprecision
     # input number of elements
