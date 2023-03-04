@@ -4,21 +4,21 @@ import numpy as np
 
 def compute_height(n, parents):
     # Write this function
-    vertiba=0
+    myvalue=0
     max_height = 0
     
     apskatitie = np.zeros(n)
     for i in range(n):
         
         if(apskatitie[i] ==0):
-            vertiba=i
+            myvalue=i
             height = np.zeros(n)
             count =0
-            while(vertiba >= 0 and height[vertiba] == 0):
-                apskatitie[vertiba] = 1
-                height[vertiba] = 1
+            while(myvalue >= 0 and height[myvalue] == 0):
+                apskatitie[myvalue] = 1
+                height[myvalue] = 1
                 count+=1
-                vertiba = parents[vertiba]
+                myvalue = parents[myvalue]
                 
             if (count > max_height):
                 max_height = count
@@ -27,7 +27,7 @@ def compute_height(n, parents):
 
 
 def main():
-    
+    # implement input form keyboard and from files
     userinput = input()
     if 'F' in userinput:
         path = input()
