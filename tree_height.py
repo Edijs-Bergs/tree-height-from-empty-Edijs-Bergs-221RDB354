@@ -8,15 +8,15 @@ def compute_height(n, parents):
     values = 0
     
     
-    apskatitie = np.zeros(n)
+    vievedvalues = np.zeros(n)
     for i in range(n):
         
-        if(apskatitie[i] == 0):
+        if(vievedvalues[i] == 0):
             values = i
             height = np.zeros(n)
             count = 0
             while(values >= 0 and height[values] == 0):
-                apskatitie[values] = 1
+                vievedvalues[values] = 1
                 height[values] = 1
                 count = count + 1
                 values = parents[values]
