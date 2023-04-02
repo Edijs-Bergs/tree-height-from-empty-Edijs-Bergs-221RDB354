@@ -1,62 +1,66 @@
-import sys
-import threading
-import numpy as np
+import random
 
-def compute_height(n, parents):
-    # Write this function
-    max_height = 0
-    values = 0
-    
-    
-    vievedvalues = np.zeros( n )
-    for i in range( n ):
-        
-        if(vievedvalues[ i ] == 0 ):
-            values = i
-            height = np.zeros( n )
-            count = 0
+class HashTable:
+    def __init__(self):
+        # Initialize the hash table with 500 buckets, a random prime number,
+        # and an arbitrary multiplier value
+        self.bucket_count = 500
+        self._multiplier = 1234
+        self._prime = random.randint(0,200)
+        self.buckets = [[] for _ in range(self.bucket_count)]
 
-            while( values >= 0 and height[ values ] == 0 ):
-                vievedvalues[ values ] = 1
-                height[ values ] = 1
-                count = count + 1
-                values = parents[ values ]
-                
-            if ( count > max_height ):
-                max_height = count
-        
-    return int( max_height )
+    def _hash_func(self, query):
+        # Private method that takes a string and returns a hash value
+        ans = 0
+        for c in reversed(query):
+            ans = (ans * self._multiplier + ord(c) % self._prime)
+        return ans % self.bucket_count
 
+    def add(self, string, string2):
+        # Method that adds a key-value pair to the hash table
+        hashed = self._hash_func(string)
+        bucket = self.buckets[hashed]
+        # If the key is already present in the bucket, update the value
+        for i in range(len(bucket)):
+            if bucket[i][0] == string:
+                bucket[i] = (string, string2)
+                return
+        # Otherwise, append the new key-value pair to the bucket
+        bucket.append((string, string2))
 
-def main():
-    # implement input form keyboard and from files
-    userinput = input()
+    def delete(self, string):
+        # Method that deletes a key-value pair from the hash table
+        hashed = self._hash_func(string)
+        bucket = self.buckets[hashed]
+        # Search for the key in the bucket, and remove it if found
+        for i in range(len(bucket)):
+            if bucket[i][0] == string:
+                bucket.pop(i)
+                break
 
-    if 'I' in userinput:
-        n = int( input() )
-        parents = np.array( list(map(int, input().split())) )
-        print( compute_height(n, parents) )
+    def find(self, string):
+        # Method that finds the value associated with a given key
+        hashed = self._hash_func(string)
+        # Search for the key in the appropriate bucket, and return the value if found
+        for elem in self.buckets[hashed]:
+            if elem[0] == string:
+                return elem[1]
+        # Return "not found" if the key is not found in the hash table
+        return "not found"
 
-    elif 'F' in userinput:
-        path = input()
-        path = "test/" + path
-
-        if 'a' not in path:
-            
-            with open( path, "r" ) as f:
-                n = int( f.readline() )
-                parents = np.array( list(map(int, f.readline().split())) )
-                print( compute_height(n, parents) )
-
-        
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
-# In Python, the default limit on recursion depth is rather low,
-# so raise it here for this problem. Note that to take advantage
-# of bigger stack, we have to launch the computation in a new thread.
-sys.setrecursionlimit(10**7)  # max depth of recursion
-threading.stack_size(2**27)   # new thread will get stack of such size
-threading.Thread(target=main).start()
+if __name__ == '__main__':
+    # Main function that reads input queries and executes them on the hash table
+    result = []
+    n = int(input())
+    hash_table = HashTable()  
+    for query in range(n):
+        query = input().split()
+        if query[0] == 'add':
+            hash_table.add(query[1], query[2])
+        elif query[0] == 'find':
+            result.append(hash_table.find(query[1]))
+        elif query[0] =='del':
+            hash_table.delete(query[1])
+    # Print the results of the find queries
+    for rez in result:
+        print(rez)
